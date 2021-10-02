@@ -9,6 +9,6 @@ const Footer = () => (
       Built by DevSkills
     </a>
   </footer>
-)
+);
 
 export default Footer;
