@@ -20,5 +20,6 @@ module.exports = {
         },
       },
     },
+    "storybook-css-modules-preset",
   ],
 };
