@@ -6,7 +6,7 @@ import { SubmitButton } from "../SubmitButton";
 
 export function SubmitTransaction() {
   return (
-    <div className="lg:h-screen center bg-gray-50">
+    <div className="lg:h-screen center bg-gray-50 p-10">
       <div className="max-w-md w-full space-y-8">
         <div>
           <Logo />
