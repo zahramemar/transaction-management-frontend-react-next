@@ -1,8 +1,9 @@
 import styles from "./styles.module.css";
 
-export function SubmitButton() {
+// TODO add type for props
+export function SubmitButton({ onClick }) {
   return (
-    <button type="submit" className={styles.button}>
+    <button onClick={onClick} type="submit" className={styles.button}>
       Submit
     </button>
   );
