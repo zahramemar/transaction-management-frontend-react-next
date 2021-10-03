@@ -14,7 +14,7 @@ export function Input({ fieldLabel, fieldType, placeHolder }: InputProps) {
         name={fieldLabel}
         type={fieldType}
         required
-        className="appearance-none rounded-none relative block w-full mt-1 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+        className="appearance-none w-full mt-1 px-3 py-2 border-2 border-gray-400 placeholder-gray-500 text-gray-900 rounded-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
         placeholder={placeHolder}
       />
     </div>
