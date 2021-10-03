@@ -1,4 +1,6 @@
 import { Logo } from "./Logo";
+import { Title } from "./Title";
+import { Subtitle } from "./Subtitle";
 
 export function SubmitTransaction() {
   return (
@@ -6,12 +8,12 @@ export function SubmitTransaction() {
       <div className="max-w-md w-full space-y-8">
         <div>
           <Logo />
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Submit new transaction
-          </h2>
-          <p className="mt-2 text-center text-sm text-blue-900">
-            you need to enter amount and account id
-          </p>
+          <div className="mt-6">
+            <Title>Submit New Transaction</Title>
+          </div>
+          <div className="mt-2">
+            <Subtitle>you need to enter amount and account id</Subtitle>
+          </div>
         </div>
         <form className="mt-8 space-y-12">
           <div className="rounded-md shadow-sm -space-y-px">
@@ -27,7 +29,7 @@ export function SubmitTransaction() {
                 placeholder="123ddfd-ffvdcc"
               />
             </div>
-            <div className="pt-5 ">
+            <div className="pt-5">
               <label htmlFor="amount" className="p-1 text-gray-500">
                 Amount
               </label>
