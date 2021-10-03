@@ -3,11 +3,33 @@ import { Title } from "../Title";
 import { Subtitle } from "../Subtitle";
 import { Input } from "../Input";
 import { SubmitButton } from "../SubmitButton";
-import { useState } from "react";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+const schema = yup.object().shape({
+  amount: yup.number().required(),
+  accountId: yup.string().uuid().required(),
+});
+
+interface FormData {
+  amount: number;
+  accountId: string;
+}
 
 export function SubmitTransaction() {
-  const [amount, setAmount] = useState(null);
-  const [accountId, setAccountId] = useState(null);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+    getValues,
+  } = useForm<FormData>({
+    resolver: yupResolver(schema) as any,
+  });
+
+  console.log(getValues());
+
   // TODO fix naming
   const call = (amount, accountId) => {
     return fetch("/api/transactions", {
@@ -21,6 +43,20 @@ export function SubmitTransaction() {
       }),
     });
   };
+  const onSubmitHandler = (data) => {
+    console.log({ data });
+    // onClick={(ev) => {
+    //   ev.preventDefault(ev);
+    //   const result = call(amount, accountId).then((res) => {
+    //     setAmount(null);
+    //     setAccountId(null);
+    //   });
+    // }}
+    reset();
+  };
+
+  const amount = register("amount");
+  console.log({ amount });
 
   return (
     <div className="lg:h-screen center bg-gray-50 p-10">
@@ -34,34 +70,27 @@ export function SubmitTransaction() {
             <Subtitle>you need to enter amount and account id</Subtitle>
           </div>
         </div>
-        <form className="mt-8 space-y-12">
+        <form
+          onSubmit={handleSubmit(onSubmitHandler)}
+          className="mt-8 space-y-12"
+        >
           <div>
             <Input
-              fieldLabel="Account ID"
-              fieldType="text"
-              placeHolder="Account ID"
-              value={accountId}
-              onChange={(e) => setAccountId(e.target.value)}
+              {...register("accountId")}
+              type="text"
+              placeholder="Account ID"
+              error={errors.accountId?.message}
             />
 
             <Input
-              fieldLabel="Amount"
-              fieldType="number"
-              placeHolder="1000"
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
+              {...amount}
+              type="number"
+              placeholder="1000"
+              error={errors.amount?.message}
             />
           </div>
 
-          <SubmitButton
-            onClick={(ev) => {
-              ev.preventDefault(ev);
-              const result = call(amount, accountId).then((res) => {
-                setAmount(null);
-                setAccountId(null);
-              });
-            }}
-          />
+          <SubmitButton />
         </form>
       </div>
     </div>
