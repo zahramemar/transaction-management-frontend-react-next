@@ -2,6 +2,7 @@ import { Logo } from "./Logo";
 import { Title } from "./Title";
 import { Subtitle } from "./Subtitle";
 import { Input } from "./Input";
+import { SubmitButton } from "./SubmitButton";
 
 export function SubmitTransaction() {
   return (
@@ -27,12 +28,7 @@ export function SubmitTransaction() {
             <Input fieldLabel="Amount" fieldType="number" placeHolder="1000" />
           </div>
 
-          <button
-            type="submit"
-            className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            Submit
-          </button>
+          <SubmitButton />
         </form>
       </div>
     </div>
