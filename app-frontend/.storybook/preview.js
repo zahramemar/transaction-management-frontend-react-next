@@ -1,6 +1,7 @@
 import * as NextImage from "next/image";
 import "tailwindcss/tailwind.css";
 import "tailwindcss/screens.css";
+import "../styles/generalStyles.css";
 
 const OriginalNextImage = NextImage.default;
 

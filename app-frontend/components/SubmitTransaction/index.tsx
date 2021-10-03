@@ -1,12 +1,12 @@
-import { Logo } from "./Logo";
-import { Title } from "./Title";
-import { Subtitle } from "./Subtitle";
-import { Input } from "./Input";
-import { SubmitButton } from "./SubmitButton";
+import { Logo } from "../Logo";
+import { Title } from "../Title";
+import { Subtitle } from "../Subtitle";
+import { Input } from "../Input";
+import { SubmitButton } from "../SubmitButton";
 
 export function SubmitTransaction() {
   return (
-    <div className="lg:h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="lg:h-screen center bg-gray-50">
       <div className="max-w-md w-full space-y-8">
         <div>
           <Logo />
