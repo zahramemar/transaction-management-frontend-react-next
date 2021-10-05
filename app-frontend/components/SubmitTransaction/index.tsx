@@ -6,6 +6,7 @@ import { SubmitButton } from "../SubmitButton";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { createTransaction } from "../../api";
 
 const schema = yup.object().shape({
   amount: yup.number().required(),
@@ -30,22 +31,12 @@ export function SubmitTransaction() {
 
   console.log(getValues());
 
-  // TODO fix naming
-  const call = (amount, accountId) => {
-    return fetch("/api/transactions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        amount: parseFloat(amount),
-        account_id: accountId,
-      }),
-    });
-  };
   const onSubmitHandler = async (data) => {
-    const result = await call(data.amount, data.accountId);
-    console.log(result);
+    const transaction = await createTransaction(
+      parseFloat(data.amount),
+      data.accountId
+    );
+
     reset();
   };
 
