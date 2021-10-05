@@ -43,20 +43,13 @@ export function SubmitTransaction() {
       }),
     });
   };
-  const onSubmitHandler = (data) => {
-    console.log({ data });
-    // onClick={(ev) => {
-    //   ev.preventDefault(ev);
-    //   const result = call(amount, accountId).then((res) => {
-    //     setAmount(null);
-    //     setAccountId(null);
-    //   });
-    // }}
+  const onSubmitHandler = async (data) => {
+    const result = await call(data.amount, data.accountId);
+    console.log(result);
     reset();
   };
 
   const amount = register("amount");
-  console.log({ amount });
 
   return (
     <div className="lg:h-screen center bg-gray-50 p-10">
