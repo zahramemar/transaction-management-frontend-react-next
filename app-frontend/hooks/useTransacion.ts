@@ -8,9 +8,7 @@ function compareTransaction(a: Transaction, b: Transaction) {
 }
 
 export function useTransactions() {
-  const { data, error } = useSWR<Transaction[]>("/api/transactions", fetcher, {
-    refreshInterval: 2000,
-  });
+  const { data, error } = useSWR<Transaction[]>("/api/transactions", fetcher);
 
   const transactions = data?.sort(compareTransaction);
 
