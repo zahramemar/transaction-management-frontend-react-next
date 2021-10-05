@@ -3,6 +3,7 @@ export interface Transaction {
   amount: number;
   transaction_id: string;
   created_at: string;
+  balance?: number;
 }
 
 export interface Account {

@@ -1,4 +1,4 @@
-import { Transaction } from "./entities/transaction.entity";
+import { Account, Transaction } from "./entities";
 
 export async function createTransaction(
   amount: number,
@@ -14,5 +14,10 @@ export async function createTransaction(
       account_id: accountId,
     }),
   });
+  return response.json();
+}
+
+export async function getAccount(accountId: string): Promise<Account> {
+  const response = await fetch(`/api/account?accountId=${accountId}`);
   return response.json();
 }

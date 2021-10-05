@@ -29,7 +29,7 @@ export function Transactions() {
             </TD>
             <TD>{transaction.amount}</TD>
             {/*TODO think about this*/}
-            <TD>{4566}</TD>
+            <TD>{transaction.balance ?? "-"}</TD>
           </TR>
         ))}
       </TBody>

@@ -6,7 +6,8 @@ import { SubmitButton } from "../SubmitButton";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { createTransaction } from "../../api";
+import { createTransaction, getAccount } from "../../api";
+import { useSWRConfig } from "swr";
 
 const schema = yup.object().shape({
   amount: yup.number().required(),
@@ -14,29 +15,36 @@ const schema = yup.object().shape({
 });
 
 interface FormData {
-  amount: number;
+  amount: string;
   accountId: string;
 }
 
 export function SubmitTransaction() {
+  const { mutate } = useSWRConfig();
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-    getValues,
   } = useForm<FormData>({
     resolver: yupResolver(schema) as any,
   });
 
-  console.log(getValues());
-
-  const onSubmitHandler = async (data) => {
+  const onSubmitHandler = async (data: FormData) => {
     const transaction = await createTransaction(
       parseFloat(data.amount),
       data.accountId
     );
 
+    const account = await getAccount(data.accountId);
+    await mutate(
+      "/api/transactions",
+      (transactions) => [
+        { ...transaction, balance: account.balance },
+        ...transactions,
+      ],
+      false
+    );
     reset();
   };
 
