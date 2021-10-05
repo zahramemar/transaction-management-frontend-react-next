@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { Transaction } from "../../entities/transaction.entity";
+import { Transaction } from "../../entities";
 
 const URL =
   "https://infra.devskills.app/api/transaction-management/transactions";

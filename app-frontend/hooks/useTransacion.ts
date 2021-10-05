@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import { Transaction } from "../entities/transaction.entity";
+import { Transaction } from "../entities";
 import { fetcher } from "../utils";
 import { compareAsc } from "date-fns/fp";
 

@@ -4,3 +4,8 @@ export interface Transaction {
   transaction_id: string;
   created_at: string;
 }
+
+export interface Account {
+  account_id: string;
+  balance: number;
+}
