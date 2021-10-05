@@ -1,14 +1,14 @@
 import { Table, TBody, TD, TH, THead, TR } from "../Table";
-
-const transactions = [...Array(500).keys()].map(() => ({
-  amount: 2,
-  account: "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx",
-  type: "deposit",
-  id: "123456",
-  balance: 0,
-}));
+import { TransactionType } from "../TransactionType";
+import { useTransactions } from "../../hooks/useTransacion";
 
 export function Transactions() {
+  const { transactions, isLoading, error } = useTransactions();
+
+  // TODO fix the design for this if I had time
+  if (error) return <div>failed to load</div>;
+  if (isLoading) return <div>loading...</div>;
+
   return (
     <Table>
       <THead>
@@ -22,18 +22,14 @@ export function Transactions() {
 
       <TBody>
         {transactions.map((transaction) => (
-          <TR key={transaction.id}>
-            <TD>{transaction.account}</TD>
+          <TR key={transaction.transaction_id}>
+            <TD>{transaction.account_id}</TD>
             <TD>
-              {/*<span className="p-1 text-xs leading-5 bg-green-100 text-green-800">*/}
-              {/*  {transaction.type}*/}
-              {/*</span>*/}
-              <span className="p-1 text-xs font-semibold font-mono rounded-sm bg-red-100 text-red-600">
-                {transaction.type}
-              </span>
+              <TransactionType amount={transaction.amount} />
             </TD>
             <TD>{transaction.amount}</TD>
-            <TD>{transaction.balance}</TD>
+            {/*TODO think about this*/}
+            <TD>{4566}</TD>
           </TR>
         ))}
       </TBody>

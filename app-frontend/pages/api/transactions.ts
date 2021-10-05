@@ -1,14 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import { Transaction } from "../../entities/transaction.entity";
 
 const URL =
   "https://infra.devskills.app/api/transaction-management/transactions";
-
-interface Transaction {
-  account_id: string;
-  amount: number;
-  transaction_id: string;
-  created_at: string;
-}
 
 const getTransactions = (): Promise<Transaction[]> =>
   fetch(URL).then((res) => res.json());
