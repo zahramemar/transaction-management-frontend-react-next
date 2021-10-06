@@ -2,12 +2,12 @@ import { Table, TBody, TD, TH, THead, TR } from "../Table";
 import { TransactionType } from "../TransactionType";
 import { useTransactions } from "../../hooks/useTransacion";
 import { Loader } from "../Loader";
+import { ErrorMessage } from "../ErrorMessage";
 
 export function Transactions() {
   const { transactions, isLoading, error } = useTransactions();
 
-  // TODO fix the design for this if I had time
-  if (error) return <div>failed to load</div>;
+  if (error) return <ErrorMessage errors={["Failed to load transactions"]} />;
   if (isLoading)
     return (
       <div className={"center"}>
