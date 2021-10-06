@@ -6,7 +6,7 @@ interface TitleProps {
 
 export function Title({ children }: TitleProps) {
   return (
-    <h2 className="text-center text-3xl font-extrabold text-gray-900">
+    <h2 className="text-center text-3xl font-extrabold text-gray-900 pb-6">
       {children}
     </h2>
   );

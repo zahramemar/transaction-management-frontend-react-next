@@ -15,7 +15,7 @@
 }
 
 .thead {
-    @apply bg-pink-200 border rounded-t
+    @apply bg-pink-200 border rounded-t overflow-x-hidden
 }
 
 .tbody {
