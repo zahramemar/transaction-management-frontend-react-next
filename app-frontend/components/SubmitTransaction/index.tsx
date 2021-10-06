@@ -8,6 +8,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { createTransaction, getAccount } from "../../api";
 import { useSWRConfig } from "swr";
+import { localTransactions, Transaction } from "../../entities";
 
 const schema = yup.object().shape({
   amount: yup.number().required(),
@@ -31,21 +32,37 @@ export function SubmitTransaction() {
   });
 
   const onSubmitHandler = async (data: FormData) => {
+    reset();
+
+    // Creating temp transaction to use Optimistic update pattern
+    await mutate(
+      "/api/transactions",
+      (transactions) => [
+        {
+          transaction_id: Math.random() + "",
+          account_id: data.accountId,
+          amount: parseFloat(data.amount),
+          created_at: new Date().toISOString(),
+          balance: "loading...",
+        } as Transaction,
+        ...transactions,
+      ],
+      false
+    );
     const transaction = await createTransaction(
       parseFloat(data.amount),
       data.accountId
     );
 
     const account = await getAccount(data.accountId);
-    await mutate(
-      "/api/transactions",
-      (transactions) => [
-        { ...transaction, balance: account.balance },
-        ...transactions,
-      ],
-      false
-    );
-    reset();
+    const transactionWithBalance = { ...transaction, balance: account.balance };
+
+    // Save the transaction in our local state
+    // We have to save it before the mutate so that usetransaction can use it
+    localTransactions[transactionWithBalance.transaction_id] =
+      transactionWithBalance;
+
+    await mutate("/api/transactions");
   };
 
   const amount = register("amount");
