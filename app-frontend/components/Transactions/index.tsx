@@ -1,13 +1,19 @@
 import { Table, TBody, TD, TH, THead, TR } from "../Table";
 import { TransactionType } from "../TransactionType";
 import { useTransactions } from "../../hooks/useTransacion";
+import { Loader } from "../Loader";
 
 export function Transactions() {
   const { transactions, isLoading, error } = useTransactions();
 
   // TODO fix the design for this if I had time
   if (error) return <div>failed to load</div>;
-  if (isLoading) return <div>loading...</div>;
+  if (isLoading)
+    return (
+      <div className={"center"}>
+        <Loader />
+      </div>
+    );
 
   return (
     <Table>
