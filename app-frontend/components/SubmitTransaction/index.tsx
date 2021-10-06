@@ -87,6 +87,7 @@ export function SubmitTransaction() {
             <Input
               {...register("accountId")}
               type="text"
+              label="Account ID"
               placeholder="Account ID"
               data-type="account-id"
               error={errors.accountId?.message}
@@ -95,6 +96,7 @@ export function SubmitTransaction() {
             <Input
               {...amount}
               type="number"
+              label="Amount"
               placeholder="1000"
               data-type="amount"
               error={errors.amount?.message}

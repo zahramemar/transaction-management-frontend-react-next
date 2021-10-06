@@ -8,12 +8,16 @@ interface InputProps
   name: string;
   type: string;
   error?: string;
+  label: string;
 }
 
-const InputComponent = ({ name, type, error, ...rest }: InputProps, ref) => (
+const InputComponent = (
+  { name, type, error, label, ...rest }: InputProps,
+  ref
+) => (
   <div className="pt-5">
     <label htmlFor={name} className="p-1 text-gray-500">
-      {name}
+      {label}
     </label>
     <input
       ref={ref}
