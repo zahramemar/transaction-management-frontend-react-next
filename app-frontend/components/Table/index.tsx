@@ -23,6 +23,6 @@ export const TBody: FC<PropsWithChildren<{}>> = ({ children }) => (
   <tbody className={styles.tbody}>{children}</tbody>
 );
 
-export const TR: FC<PropsWithChildren<{}>> = ({ children }) => (
-  <tr>{children}</tr>
+export const TR: FC<PropsWithChildren<{}>> = ({ children, ...rest }) => (
+  <tr {...rest}>{children}</tr>
 );

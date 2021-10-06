@@ -88,6 +88,7 @@ export function SubmitTransaction() {
               {...register("accountId")}
               type="text"
               placeholder="Account ID"
+              data-type="account-id"
               error={errors.accountId?.message}
             />
 
@@ -95,6 +96,7 @@ export function SubmitTransaction() {
               {...amount}
               type="number"
               placeholder="1000"
+              data-type="amount"
               error={errors.amount?.message}
             />
           </div>

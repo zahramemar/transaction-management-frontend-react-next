@@ -28,7 +28,13 @@ export function Transactions() {
 
       <TBody>
         {transactions.map((transaction) => (
-          <TR key={transaction.transaction_id}>
+          <TR
+            data-type="transaction"
+            data-account-id={transaction.account_id}
+            data-amount={transaction.amount}
+            data-balance={transaction.balance}
+            key={transaction.transaction_id}
+          >
             <TD>{transaction.account_id}</TD>
             <TD>
               <TransactionType amount={transaction.amount} />

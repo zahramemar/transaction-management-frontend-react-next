@@ -2,8 +2,11 @@ import styles from "./styles.module.css";
 
 export function SubmitButton() {
   return (
-    <button type="submit" className={styles.button}>
-      Submit
-    </button>
+    <input
+      type="submit"
+      className={styles.button}
+      data-type="transaction-submit"
+      value="Submit"
+    />
   );
 }
