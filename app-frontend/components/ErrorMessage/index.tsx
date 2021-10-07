@@ -28,8 +28,8 @@ export const ErrorMessage = ({ errors }: ErrorMessageProps) => (
           </p>
         </div>
         <div className="px-16 mb-4">
-          {errors.map((errorMsg) => (
-            <li className="text-md font-bold text-red-500 text-sm">
+          {errors.map((errorMsg, index) => (
+            <li key={index} className="text-md font-bold text-red-500 text-sm">
               {errorMsg}
             </li>
           ))}
