@@ -11,8 +11,11 @@ import { useSWRConfig } from "swr";
 import { localTransactions, Transaction } from "../../entities";
 
 const schema = yup.object().shape({
-  amount: yup.number().required(),
-  accountId: yup.string().uuid().required(),
+  amount: yup
+    .number()
+    .typeError("Amount must be a number")
+    .required("Amount must be filled"),
+  accountId: yup.string().required("Account ID must be filled").uuid(),
 });
 
 interface FormData {
