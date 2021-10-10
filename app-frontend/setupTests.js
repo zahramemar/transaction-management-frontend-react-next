@@ -4,3 +4,10 @@
 // used for __tests__/Hero.spec.js
 // learn more: https://github.com/testing-library/jest-dom
 import "@testing-library/jest-dom/extend-expect";
+
+jest.mock("next/image", () => ({
+  __esModule: true,
+  default: () => {
+    return <>MOCKED IMAGE</>;
+  },
+}));

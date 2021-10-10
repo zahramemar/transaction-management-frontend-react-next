@@ -16,6 +16,7 @@ module.exports = {
   ],
   moduleNameMapper: {
     "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy",
+    "^.+\\.(png|jpg)$": "identity-obj-proxy",
   },
   testEnvironment: "jsdom",
 };
