@@ -4,8 +4,13 @@ import { Transaction } from "../../entities";
 const URL =
   "https://infra.devskills.app/api/transaction-management/transactions";
 
-const getTransactions = (): Promise<Transaction[]> =>
-  fetch(URL).then((res) => res.json());
+const getTransactions = async (): Promise<{
+  result: Transaction[];
+  status: number;
+}> => {
+  const res = await fetch(URL);
+  return { result: await res.json(), status: res.status };
+};
 
 interface TransactionData {
   amount: number;
@@ -31,8 +36,8 @@ export default async function handler(
   response: NextApiResponse
 ) {
   if (request.method === "GET") {
-    const transactions = await getTransactions();
-    response.status(200).json(transactions);
+    const { result, status } = await getTransactions();
+    response.status(status).json(result);
   } else if (request.method === "POST") {
     const transactionData = request.body;
     const { result, status } = await createTransaction(transactionData);
