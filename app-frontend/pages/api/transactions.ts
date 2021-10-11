@@ -20,7 +20,10 @@ async function createTransaction(data: TransactionData) {
     },
     body: JSON.stringify(data),
   });
-  return response.json();
+  return {
+    result: await response.json(),
+    status: response.status,
+  };
 }
 
 export default async function handler(
@@ -32,7 +35,7 @@ export default async function handler(
     response.status(200).json(transactions);
   } else if (request.method === "POST") {
     const transactionData = request.body;
-    const result = await createTransaction(transactionData);
-    response.status(201).json(result);
+    const { result, status } = await createTransaction(transactionData);
+    response.status(status).json(result);
   }
 }

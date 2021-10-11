@@ -14,7 +14,10 @@ export async function createTransaction(
       account_id: accountId,
     }),
   });
-  return response.json();
+  const res = await response.json();
+  if (!response.ok) throw new Error(res.errors.join("\n "));
+
+  return res;
 }
 
 export async function getAccount(accountId: string): Promise<Account> {

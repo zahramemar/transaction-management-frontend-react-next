@@ -5,6 +5,8 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHeader } from "./SubmitHeader";
 import { useCreateTransaction } from "../../hooks/useCreateTransaction";
+import { useState } from "react";
+import { ErrorMessage } from "../ErrorMessage";
 
 const schema = yup.object().shape({
   amount: yup
@@ -21,6 +23,7 @@ interface FormData {
 
 export function SubmitTransaction() {
   const createTransaction = useCreateTransaction();
+  const [error, setError] = useState("");
   const {
     register,
     handleSubmit,
@@ -31,8 +34,13 @@ export function SubmitTransaction() {
   });
 
   const onSubmitHandler = async (data: FormData) => {
+    setError("");
     reset();
-    await createTransaction(data.accountId, parseFloat(data.amount));
+    try {
+      await createTransaction(data.accountId, parseFloat(data.amount));
+    } catch (e) {
+      setError(e.message);
+    }
   };
 
   return (
@@ -64,6 +72,8 @@ export function SubmitTransaction() {
           </div>
 
           <SubmitButton />
+
+          {!!error && <ErrorMessage errors={[error]} />}
         </form>
       </div>
     </div>
