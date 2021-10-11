@@ -18,7 +18,7 @@ export function useCreateTransaction() {
             created_at: new Date().toISOString(),
             balance: "loading...",
           } as Transaction,
-          ...transactions,
+          ...(transactions ?? []),
         ],
         false
       );
