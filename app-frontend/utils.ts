@@ -1,3 +1,2 @@
-// TODO if I had time should check how can I fix this type
-export const fetcher = (...args: any[]) =>
-  fetch(...args).then((res) => res.json());
+export const fetcher = (input: RequestInfo, init?: RequestInit) =>
+  fetch(input, init).then((res) => res.json());

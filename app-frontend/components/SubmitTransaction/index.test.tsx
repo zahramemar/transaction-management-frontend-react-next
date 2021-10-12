@@ -2,7 +2,7 @@ import { act, fireEvent, render } from "@testing-library/react";
 import { SubmitTransaction } from "./index";
 import idObj from "identity-obj-proxy";
 
-window.fetch = jest.fn(async () => ({
+(window as any).fetch = jest.fn(async () => ({
   async json() {
     return idObj;
   },
@@ -10,7 +10,7 @@ window.fetch = jest.fn(async () => ({
 
 describe("<SubmitTransaction />", () => {
   beforeEach(() => {
-    window.fetch.mockRestore();
+    (window.fetch as any).mockRestore();
   });
 
   it("should show error if fields are empty and submit button has clicked", async () => {
@@ -130,7 +130,7 @@ describe("<SubmitTransaction />", () => {
       target: { value: "6862092b-ef27-494f-b720-5790582b35c8" },
     });
 
-    window.fetch.mockRejectedValue(new Error(errorMsg));
+    (window.fetch as any).mockRejectedValue(new Error(errorMsg));
     await act(() => {
       fireEvent.click(getByText("Submit"));
       return Promise.resolve();

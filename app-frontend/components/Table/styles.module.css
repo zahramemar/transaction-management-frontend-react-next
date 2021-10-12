@@ -1,23 +1,23 @@
 .borderRounded {
-    @apply border border-gray-200 rounded-sm
+  @apply border border-gray-200 rounded-sm;
 }
 
 .table {
-    @apply divide-y divide-gray-200 min-w-full
+  @apply divide-y divide-gray-200 min-w-full;
 }
 
 .td {
-    @apply text-left text-gray-500 p-3
+  @apply text-left text-gray-500 p-3;
 }
 
 .th {
-    @apply text-left text-gray-700 p-3 font-medium tracking-wider
+  @apply text-left text-gray-700 p-3 font-medium tracking-wider;
 }
 
 .thead {
-    @apply bg-pink-200 border rounded-t overflow-x-hidden
+  @apply bg-pink-200 border rounded-t overflow-x-hidden;
 }
 
 .tbody {
-    @apply divide-y divide-gray-200
+  @apply divide-y divide-gray-200;
 }
