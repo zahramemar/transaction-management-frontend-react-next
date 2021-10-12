@@ -8,7 +8,7 @@ export function useCreateTransaction() {
   return useCallback(
     async (accountId: string, amount: number) => {
       // Creating temp transaction to use Optimistic update pattern
-      await mutate(
+      const transactions = await mutate(
         "/api/transactions",
         (transactions) => [
           {
@@ -35,6 +35,11 @@ export function useCreateTransaction() {
       localTransactions[transactionWithBalance.transaction_id] =
         transactionWithBalance;
 
+      // Update local transactions with balance
+      transactions[0] = transactionWithBalance;
+      await mutate("/api/transactions", transactions, false);
+
+      // Get the latest transactions
       await mutate("/api/transactions");
     },
     [mutate]
